@@ -1,0 +1,28 @@
+---
+title: "documentation"
+author: "Samuel Colin"
+date: "05.072019"
+output: html_document
+---
+
+# Potential data sources
+
+https://www.bfs.admin.ch/bfs/fr/home/statistiques/statistique-regions/portraits-regionaux-chiffres-cles/communes.html
+
+Or one can use stat-tab with the filter canton/district/commune
+
+Stat-tab: https://www.pxweb.bfs.admin.ch/pxweb/fr/
+
+Variables of interest:
+
+  - population
+  - population density
+  - ev. population age groups
+  - vacancies
+  - new houses
+  - social cover rate
+  - foreigners (in%)
+  - type of building
+  - education
+  
+Take also the vars at canton's level to make deviation in comparison
