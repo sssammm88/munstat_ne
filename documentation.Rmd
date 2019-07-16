@@ -5,6 +5,13 @@ date: "05.072019"
 output: html_document
 ---
 
+# To do
+
+  - try to create a data set with the variable of interest
+  - finish mockup frontend
+  - Create working backend
+  - connect both
+
 # Potential data sources
 
 https://www.bfs.admin.ch/bfs/fr/home/statistiques/statistique-regions/portraits-regionaux-chiffres-cles/communes.html
