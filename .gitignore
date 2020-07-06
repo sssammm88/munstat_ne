@@ -3,3 +3,6 @@
 .RData
 .Ruserdata
 munstat_ne.Rproj
+*.xlsx
+*.html
+

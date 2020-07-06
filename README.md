@@ -10,5 +10,5 @@ The project is structured as follows:
 
 - **data**: contains the data
 - **doc**: contains the project documentation
-- **src*: contains the source files
+- **src**: contains the source files
 
