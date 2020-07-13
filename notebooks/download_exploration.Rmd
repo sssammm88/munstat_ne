@@ -1,0 +1,54 @@
+---
+title: "Data download and exploration"
+output: html_notebook
+---
+
+# Execute download script
+
+```{r}
+source("../src/download_demographic_data.R")
+download_demographic_data(verbose = TRUE)
+```
+
+# Load data
+
+Load data
+```{r}
+demographics <- read_csv("../data/demographics.csv")
+to_factors <- c(
+  "GDENAME", "sexe", "nationalite_categorie", "composante_demographique"
+)
+demographics[to_factors] %<>% lapply(as.factor)
+```
+
+
+# Perform some data exploration
+
+Summary statistics:
+```{r}
+demographics %>% summary()
+```
+
+
+Composante démographique
+```{r}
+demographics$composante_demographique %>% summary()
+```
+
+Make a simple plot of the population on the 1st of January
+```{r}
+first_jan <- demographics %>% filter(
+  composante_demographique == "Effectif au 1er janvier"
+) %>% filter(sexe == "Sexe - total") %>%
+  filter(nationalite_categorie == "Nationalité - total") %>%
+  filter(GDENAME == "Neuchâtel")
+pl <- ggplot(first_jan, aes(x = annee, y = nbr_people, col = GDENAME))
+pl <- pl + geom_line()
+pl
+```
+
+```{r}
+first_jan
+```
+
+
