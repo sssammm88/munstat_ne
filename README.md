@@ -19,11 +19,13 @@ Things to implement s.t. the app is functional
 - [x] Add input to select municipality
 - [x] Add input for sex
 - [x] Add input for nationality
-- [] Add input for normal vs. log scale
+- [x] Add a smoother
+- [x] Make possbile to select multiple municipalities
+- [_] Add input for normal vs. log scale
 - [x] Make backend to work
-- [] Improve appearance
-- [] Publish app
-- [] Make it easy to download the app and recreate the environment
+- [_] Improve appearance
+- [_] Publish app
+- [_] Make it easy to download the app and recreate the environment
 
 Later improvements
 
