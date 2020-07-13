@@ -5,4 +5,5 @@
 munstat_ne.Rproj
 *.xlsx
 *.html
+*rsconnect*
 
