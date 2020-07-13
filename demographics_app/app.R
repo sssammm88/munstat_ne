@@ -14,6 +14,7 @@
 library(shiny)
 library(tidyverse)
 library(magrittr)
+library(forecast)
 
 # Data ----
 
@@ -51,28 +52,46 @@ ui <- fluidPage(
             selectInput(
                 inputId = "mun_name",
                 label = "Commune",
-                choices = list_mun
+                choices = list_mun,
+                selected = "Neuchâtel"
             ),
             
             # Demographic variable
             selectInput(
                 inputId = "variable_name",
                 label = "Variable démographique",
-                choices = list_variables
+                choices = list_variables,
+                selected = "Effectif au 31 décembre"
             ),
             
             # Sex
             selectInput(
                 inputId = "sex",
                 label = "Sexe",
-                choices = list_sexes
+                choices = list_sexes,
+                selected = "Sexe - total"
             ),
             
             # Nationalities
             selectInput(
                 inputId = "nationality",
                 label = "Suisses / Etrangers",
-                choices = list_nationalities
+                choices = list_nationalities,
+                selected = "Nationalité - total"
+            ),
+            radioButtons(
+                inputId = "smoother",
+                label = "Ajouter une moyenne mobile d'ordre q",
+                choices = list("Oui", "Non"),
+                selected = "Non"
+            ),
+            sliderInput(
+                inputId = "q",
+                label = "q",
+                min = 1,
+                max = 11,
+                value = 5,
+                step = 2
             )
         ),
 
@@ -106,8 +125,13 @@ server <- function(input, output) {
             col = GDENAME
             )
         )
-        pl <- pl + geom_line()
+        pl <- pl + geom_point()
+        pl <- pl + geom_line(linetype = "dashed")
         pl <- pl + labs(x = "Année", y = input$variable_name, col = "Commune")
+        if (input$smoother == "Oui"){
+            data_ma <- data_for_plot$nbr_people %>% ma(order = input$q)
+            pl <- pl + geom_line(aes(y = data_ma), size = 1)
+        }
         pl
     })
 }
