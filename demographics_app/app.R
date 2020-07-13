@@ -48,7 +48,7 @@ ui <- fluidPage(
     # Sidebar with a slider input for number of bins 
     sidebarLayout(
         sidebarPanel(
-            # Municipality
+            # Municipality ----
             selectInput(
                 inputId = "mun_name",
                 label = "Commune",
@@ -57,7 +57,7 @@ ui <- fluidPage(
                 multiple = TRUE
             ),
             
-            # Demographic variable
+            # Demographic variable ----
             selectInput(
                 inputId = "variable_name",
                 label = "Variable démographique",
@@ -65,7 +65,7 @@ ui <- fluidPage(
                 selected = "Effectif au 31 décembre"
             ),
             
-            # Sex
+            # Sex ----
             selectInput(
                 inputId = "sex",
                 label = "Sexe",
@@ -73,13 +73,15 @@ ui <- fluidPage(
                 selected = "Sexe - total"
             ),
             
-            # Nationalities
+            # Nationalities ----
             selectInput(
                 inputId = "nationality",
                 label = "Suisses / Etrangers",
                 choices = list_nationalities,
                 selected = "Nationalité - total"
             ),
+            
+            # Smoother ----
             radioButtons(
                 inputId = "smoother",
                 label = "Ajouter une moyenne mobile d'ordre q",
@@ -94,6 +96,8 @@ ui <- fluidPage(
                 value = 5,
                 step = 2
             ),
+            
+            # Log scale
             radioButtons(
                 inputId = "logscale",
                 label = "Echelle",
@@ -102,9 +106,24 @@ ui <- fluidPage(
             )
         ),
 
-        # Show a plot of the generated distribution
+        # Main panel ---
         mainPanel(
-           plotOutput("distPlot")
+            
+            # Display line plot
+            plotOutput(outputId = "line_plot"),
+            
+            # Text about source of the data
+            p("Les données proviennent de l'Office Fédéral de",
+              "la Statistique (OFS). Lien px (utilisable uniquement avec",
+              "un logiciel spécial: "
+              ),
+            a("https://www.bfs.admin.ch/bfsstatic/dam/assets/9566432/master"),
+            
+            # Download dataset ----
+            downloadButton(
+                outputId = "download_data", 
+                label = "Télécharger les données (csv)"
+           )
         )
     )
 )
@@ -116,7 +135,16 @@ ui <- fluidPage(
 # Define server logic required to draw a histogram
 server <- function(input, output) {
     
-    output$distPlot <- renderPlot({
+    # Store dataset in input
+    # input$dataset <- demographics
+    # data_to_download <- reactive({
+    #     input$dataset
+    # })
+    
+    # Outputs ----
+    
+    # Line plot
+    output$line_plot <- renderPlot({
         
         # Filter the data to keep only what interests us
         data_for_plot <- demographics %>% 
@@ -151,6 +179,18 @@ server <- function(input, output) {
         # Display
         pl
     })
+    
+    # Downloadable csv of selected dataset----
+    output$download_data <- downloadHandler(
+        filename = "demographics.csv",
+        content = function(file) {
+            write.csv(
+                x = demographics,
+                file = file, 
+                row.names = FALSE
+            )
+        }
+    )
 }
 
 # Run the application ----

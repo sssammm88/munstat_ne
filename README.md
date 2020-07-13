@@ -26,7 +26,8 @@ Things to implement s.t. the app is functional
 - [x] Add input for normal vs. log scale
 - [x] Make backend to work
 - [x] Improve appearance
-- [ ] Publish app
+- [x] Make data downloadable and display their source
+- [x] Publish app
 - [ ] Make it easy to download the app and recreate the environment
 
 Later improvements
