@@ -53,7 +53,8 @@ ui <- fluidPage(
                 inputId = "mun_name",
                 label = "Commune",
                 choices = list_mun,
-                selected = "Neuchâtel"
+                selected = "Neuchâtel",
+                multiple = TRUE
             ),
             
             # Demographic variable
