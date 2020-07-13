@@ -93,6 +93,12 @@ ui <- fluidPage(
                 max = 11,
                 value = 5,
                 step = 2
+            ),
+            radioButtons(
+                inputId = "logscale",
+                label = "Echelle",
+                choices = list("Normale", "Logarithmique"),
+                selected = "Normale"
             )
         ),
 
@@ -128,14 +134,24 @@ server <- function(input, output) {
         )
         pl <- pl + geom_point()
         pl <- pl + geom_line(linetype = "dashed")
+        
+        # Labels
         pl <- pl + labs(x = "Année", y = input$variable_name, col = "Commune")
+        
+        # Smoother
         if (input$smoother == "Oui"){
             data_ma <- data_for_plot$nbr_people %>% ma(order = input$q)
             pl <- pl + geom_line(aes(y = data_ma), size = 1)
         }
+        # Log scale
+        if (input$logscale == "Logarithmique"){
+            pl <- pl + scale_y_continuous(trans='log10')
+        }
+        
+        # Display
         pl
     })
 }
 
-# Run the application 
+# Run the application ----
 shinyApp(ui = ui, server = server)
