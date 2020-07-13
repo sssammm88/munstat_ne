@@ -80,4 +80,10 @@ download_demographic_data <- function(
     print("Save data")
   }
   write_csv(data_demographics_ne, path = save_path)
+  
+  # Copy the data in the demographics_app directory
+  file.copy(
+    from = "../data/demographics.csv", 
+    to = "../demographics_app/demographics.csv"
+  )
 }
