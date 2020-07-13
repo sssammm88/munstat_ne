@@ -19,7 +19,7 @@ library(forecast)
 # Data ----
 
 # Load data from .csv file
-demographics <- read_csv("../data/demographics.csv")
+demographics <- read_csv("demographics.csv")
 to_factors <- c("GDENAME", "sexe", "nationalite_categorie", 
                 "composante_demographique")
 demographics[, to_factors] %<>% lapply(as.factor)
