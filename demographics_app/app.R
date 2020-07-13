@@ -107,6 +107,7 @@ server <- function(input, output) {
             )
         )
         pl <- pl + geom_line()
+        pl <- pl + labs(x = "Année", y = input$variable_name, col = "Commune")
         pl
     })
 }
