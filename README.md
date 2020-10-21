@@ -11,7 +11,9 @@ The application is available under https://sssammm.shinyapps.io/munstat_ne/.
 The project is structured as follows:
 
 - **data**: contains the data
+- **demographics\_app**: contains the Shiny app itself
 - **doc**: contains the project documentation
+- **notebooks**: contains exploratory notebooks
 - **src**: contains the source files
 
 ## To do
@@ -28,10 +30,10 @@ Things to implement s.t. the app is functional
 - [x] Improve appearance
 - [x] Make data downloadable and display their source
 - [x] Publish app
-- [ ] Make it easy to download the app and recreate the environment
 
 Later improvements
 
+- [ ] Make it easy to download the app and recreate the environment
 - [ ] Add a map with year selection input
 - [ ] Add button to upload data
 - [ ] Add other variables than demographical
